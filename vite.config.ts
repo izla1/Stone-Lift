@@ -5,12 +5,13 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  base: "/Stone-Lift/",   // ← ضيف السطر ده، بدّل repo-name باسم الريبو بتاعك بالظبط
   server: {
     host: "::",
     port: 8080,
-    hmr: {
-      overlay: false,
-    },
+    hmr: { overlay: false },
+  },
+  ...
   },
   plugins: [react(), mode === "development" && componentTagger()].filter(Boolean),
   resolve: {
