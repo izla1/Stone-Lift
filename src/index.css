@@ -1,0 +1,351 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap');
+
+@layer base {
+  :root, .dark {
+    --red: 0 70% 36%;
+    --red-dark: 0 75% 24%;
+    --red-light: 6 70% 47%;
+    --gold: 43 53% 54%;
+    --gold-light: 43 64% 69%;
+    --cream: 36 50% 92%;
+    --dark: 0 60% 3%;
+    --dark-2: 0 50% 7%;
+
+    --background: 0 60% 3%;
+    --foreground: 0 0% 100%;
+    --card: 0 50% 7%;
+    --card-foreground: 0 0% 100%;
+    --primary: 43 53% 54%;
+    --primary-foreground: 0 60% 3%;
+    --secondary: 0 70% 36%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 0 30% 12%;
+    --muted-foreground: 0 0% 65%;
+    --accent: 6 70% 47%;
+    --accent-foreground: 0 0% 100%;
+    --border: 43 30% 25%;
+    --input: 0 30% 12%;
+    --ring: 43 53% 54%;
+    --radius: 1rem;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --popover: 0 50% 7%;
+    --popover-foreground: 0 0% 100%;
+
+    --surface: 0 0% 100%;
+    --surface-soft: 0 0% 100% / 0.04;
+    --on-dark: 0 0% 100%;
+
+    /* Theme-aware semantic tokens used across components */
+    --section-bg: 0 60% 3%;
+    --section-bg-2: 0 50% 7%;
+    --hero-overlay: 0 60% 3%;          /* used inside hsla() */
+    --text-strong: 0 0% 100%;
+    --text-soft: 0 0% 100% / 0.8;
+    --text-muted: 0 0% 100% / 0.6;
+    --text-faint: 0 0% 100% / 0.4;
+    --card-bg: 0 0% 100% / 0.05;
+    --card-border: 0 0% 100% / 0.1;
+    --footer-bg: 0 0% 0% / 0.4;
+    --nav-scrolled-bg: 0 0% 0% / 0.5;
+    --nav-mobile-bg: 0 0% 0% / 0.9;
+  }
+
+  .light {
+    /* Brand palette extracted from Stone Lift Company Profile (cream / deep red / warm gold) */
+    --red: 0 64% 34%;          /* #8B1F1F */
+    --red-dark: 0 70% 26%;
+    --red-light: 0 64% 40%;
+    --gold: 32 35% 44%;        /* #99764C warm tan/gold */
+    --gold-light: 32 40% 55%;
+    --cream: 36 38% 90%;
+    --dark: 36 38% 90%;        /* alias used by old code -> cream */
+    --dark-2: 36 30% 84%;
+
+    --background: 38 40% 92%;  /* #EFE9DC */
+    --foreground: 0 0% 12%;    /* #1F1F1F */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 12%;
+    --primary: 32 35% 44%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 64% 34%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 36 25% 86%;
+    --muted-foreground: 0 0% 28%;
+    --accent: 0 64% 34%;
+    --accent-foreground: 0 0% 100%;
+    --border: 32 25% 70%;
+    --input: 36 25% 86%;
+    --ring: 32 35% 44%;
+    --destructive: 0 75% 42%;
+    --destructive-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 12%;
+
+    --surface: 0 0% 0%;
+    --on-dark: 0 0% 12%;
+
+    /* Light-mode overrides */
+    --section-bg: 38 40% 92%;
+    --section-bg-2: 36 32% 86%;
+    --hero-overlay: 38 40% 92%;
+    --text-strong: 0 0% 12%;
+    --text-soft: 0 0% 20%;
+    --text-muted: 0 0% 32%;
+    --text-faint: 0 0% 45%;
+    --card-bg: 0 0% 100% / 0.7;
+    --card-border: 32 25% 65% / 0.5;
+    --footer-bg: 36 32% 86%;
+    --nav-scrolled-bg: 38 40% 92% / 0.85;
+    --nav-mobile-bg: 38 40% 94% / 0.97;
+  }
+}
+
+* { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body, 'Inter', sans-serif);
+  background: hsl(var(--background));
+  color: hsl(var(--text-body, var(--foreground)));
+  overflow-x: hidden;
+}
+
+html[dir="rtl"] body, .font-arabic {
+  font-family: var(--font-arabic, 'Noto Naskh Arabic', serif);
+}
+
+.font-display { font-family: var(--font-heading, 'Playfair Display', serif); }
+.font-english { font-family: var(--font-body, 'Inter', sans-serif); }
+
+/* CMS-controlled text colors — apply to common heading/text utilities */
+h1, h2, h3, h4, h5, h6, .font-display { color: hsl(var(--text-heading, var(--foreground))); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  33% { transform: translateY(-14px) rotate(0.5deg); }
+  66% { transform: translateY(-7px) rotate(-0.5deg); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes particle-float {
+  0% { transform: translateY(110vh) translateX(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.1; }
+  100% { transform: translateY(-100px) translateX(40px); opacity: 0; }
+}
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 30px hsl(var(--gold) / 0.2); }
+  50% { box-shadow: 0 0 60px hsl(var(--gold) / 0.5); }
+}
+
+.animate-float { animation: float 7s ease-in-out infinite; }
+.animate-spin-slow { animation: spin-slow 20s linear infinite; }
+.animate-fade-up { animation: fadeUp 0.9s ease forwards; }
+.animate-glow-pulse { animation: glow-pulse 4s ease-in-out infinite; }
+
+.animate-shimmer {
+  background: linear-gradient(90deg, hsl(var(--gold)) 0%, hsl(var(--gold-light)) 50%, hsl(var(--gold)) 100%);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.scroll-reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.scroll-reveal.visible { opacity: 1; transform: translateY(0); }
+.scroll-reveal-left { opacity: 0; transform: translateX(-60px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.scroll-reveal-left.visible { opacity: 1; transform: translateX(0); }
+.scroll-reveal-right { opacity: 0; transform: translateX(60px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.scroll-reveal-right.visible { opacity: 1; transform: translateX(0); }
+
+.delay-100 { transition-delay: 0.1s; }
+.delay-200 { transition-delay: 0.2s; }
+.delay-300 { transition-delay: 0.3s; }
+.delay-400 { transition-delay: 0.4s; }
+.delay-500 { transition-delay: 0.5s; }
+.delay-600 { transition-delay: 0.6s; }
+
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: hsl(var(--dark-2)); }
+::-webkit-scrollbar-thumb { background: hsl(var(--gold)); border-radius: 3px; }
+
+.glass {
+  background: hsl(var(--surface) / 0.04);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--surface) / 0.08);
+}
+.light .glass {
+  background: hsl(0 0% 100% / 0.85);
+  border: 1px solid hsl(var(--border));
+}
+.glass-gold {
+  background: hsl(var(--gold) / 0.06);
+  backdrop-filter: blur(12px);
+  border: 1px solid hsl(var(--gold) / 0.2);
+}
+
+.gold-line { height: 1px; background: linear-gradient(90deg, transparent, hsl(var(--gold)), transparent); }
+
+.product-card { transition: transform 0.5s ease, box-shadow 0.5s ease, border-color 0.5s ease; }
+.product-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 30px 70px hsl(var(--gold) / 0.18);
+  border-color: hsl(var(--gold) / 0.5) !important;
+}
+
+.particle {
+  position: absolute;
+  border-radius: 50%;
+  animation: particle-float linear infinite;
+  pointer-events: none;
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, hsl(var(--red-light)), hsl(var(--red)));
+  border: 1px solid hsl(var(--gold) / 0.3);
+  transition: all 0.4s ease;
+}
+.btn-primary:hover {
+  background: linear-gradient(135deg, hsl(var(--gold)), hsl(43 53% 44%));
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px hsl(var(--gold) / 0.3);
+}
+
+.btn-outline {
+  border: 1px solid hsl(var(--gold));
+  color: hsl(var(--gold));
+  transition: all 0.4s ease;
+}
+.btn-outline:hover {
+  background: hsl(var(--gold));
+  color: hsl(var(--dark));
+  transform: translateY(-2px);
+}
+
+.text-gold { color: hsl(var(--gold)); }
+.bg-gold { background: hsl(var(--gold)); }
+.border-gold { border-color: hsl(var(--gold) / 0.3); }
+
+/* ============================================================
+   LIGHT MODE GLOBAL SHIM
+   Maps Tailwind utilities that hardcode white/black to themed
+   foreground/surface tokens so dark-first markup reads correctly
+   on the cream brand background without rewriting every component.
+   ============================================================ */
+.light {
+  color-scheme: light;
+}
+
+/* Text — invert white tints to dark foreground tints */
+.light .text-white { color: hsl(var(--foreground)) !important; }
+.light .text-white\/90 { color: hsl(var(--foreground) / 0.9) !important; }
+.light .text-white\/80 { color: hsl(var(--foreground) / 0.85) !important; }
+.light .text-white\/70 { color: hsl(var(--foreground) / 0.78) !important; }
+.light .text-white\/60 { color: hsl(var(--foreground) / 0.7) !important; }
+.light .text-white\/50 { color: hsl(var(--foreground) / 0.6) !important; }
+.light .text-white\/40 { color: hsl(var(--foreground) / 0.5) !important; }
+.light .text-white\/30 { color: hsl(var(--foreground) / 0.4) !important; }
+.light .text-white\/20 { color: hsl(var(--foreground) / 0.3) !important; }
+.light .placeholder\:text-white\/40::placeholder { color: hsl(var(--foreground) / 0.45) !important; }
+
+/* Background — invert black tints to themed surface tints */
+.light .bg-black\/90 { background-color: hsl(var(--background) / 0.95) !important; }
+.light .bg-black\/80 { background-color: hsl(var(--background) / 0.9) !important; }
+.light .bg-black\/70 { background-color: hsl(var(--background) / 0.85) !important; }
+.light .bg-black\/50 { background-color: hsl(var(--background) / 0.75) !important; }
+.light .bg-black\/40 { background-color: hsl(var(--muted) / 0.6) !important; }
+.light .bg-black\/30 { background-color: hsl(var(--muted) / 0.45) !important; }
+.light .bg-black\/20 { background-color: hsl(var(--muted) / 0.3) !important; }
+
+/* White-tinted surfaces become dark-tinted on cream */
+.light .bg-white\/5 { background-color: hsl(var(--foreground) / 0.04) !important; }
+.light .bg-white\/10 { background-color: hsl(var(--foreground) / 0.07) !important; }
+.light .bg-white\/20 { background-color: hsl(var(--foreground) / 0.12) !important; }
+.light .hover\:bg-white\/10:hover { background-color: hsl(var(--foreground) / 0.07) !important; }
+
+/* Borders */
+.light .border-white\/5 { border-color: hsl(var(--foreground) / 0.08) !important; }
+.light .border-white\/10 { border-color: hsl(var(--foreground) / 0.12) !important; }
+.light .border-white\/20 { border-color: hsl(var(--foreground) / 0.18) !important; }
+
+/* Shadows — soften the heavy black drop shadows from dark theme */
+.light [style*="rgba(0,0,0,0.6)"],
+.light [style*="rgba(0,0,0,0.5)"],
+.light [style*="rgba(0,0,0,0.4)"],
+.light [style*="rgba(0,0,0,0.3)"] {
+  filter: none;
+}
+
+/* Hero & section overlays that hardcode the dark-red wash:
+   neutralize them in light mode by using ::before strategy not
+   possible here — instead rely on theme-aware --section-bg via
+   per-component edits below. */
+
+/* Exceptions: keep true white text on inherently dark/colored surfaces */
+.light .btn-primary,
+.light .btn-primary * {
+  color: #fff !important;
+}
+.light .btn-primary { color: #fff !important; }
+
+/* Social icon buttons in Footer/Contact use white text on bordered chips that stay light too — let shim handle them */
+
+/* ============================================================
+   CMS COLOR PROPAGATION
+   When admins set custom Text Colors and Brand Accents in the
+   dashboard, force the change to win over hardcoded Tailwind
+   utility classes (text-white, text-[hsl(var(--gold))], etc.).
+   ============================================================ */
+
+/* Headings always follow the CMS heading color */
+h1, h2, h3, h4, h5, h6,
+.font-display {
+  color: hsl(var(--text-heading)) !important;
+}
+
+/* Body text follows --text-body — paragraphs, list items, spans, links default */
+body, p, li, span, label, td, th, a, div {
+  /* keep low specificity — only sets the cascade default */
+}
+body { color: hsl(var(--text-body)); }
+
+/* Make sure utility text-white inherits the CMS body color in BOTH themes
+   when the admin has set one. Scoped to html so specificity beats the
+   .light shim above. */
+html .text-white,        html.light .text-white,        html.dark .text-white        { color: hsl(var(--text-body)) !important; }
+html .text-white\/90,    html.light .text-white\/90,    html.dark .text-white\/90    { color: hsl(var(--text-body) / 0.9) !important; }
+html .text-white\/80,    html.light .text-white\/80,    html.dark .text-white\/80    { color: hsl(var(--text-body) / 0.8) !important; }
+html .text-white\/70,    html.light .text-white\/70,    html.dark .text-white\/70    { color: hsl(var(--text-body) / 0.7) !important; }
+html .text-white\/60,    html.light .text-white\/60,    html.dark .text-white\/60    { color: hsl(var(--text-body) / 0.6) !important; }
+html .text-white\/50,    html.light .text-white\/50,    html.dark .text-white\/50    { color: hsl(var(--text-body) / 0.5) !important; }
+html .text-white\/40,    html.light .text-white\/40,    html.dark .text-white\/40    { color: hsl(var(--text-body) / 0.4) !important; }
+
+/* Headings — boost specificity so light-mode shims can't override CMS heading color */
+html h1, html h2, html h3, html h4, html h5, html h6, html .font-display,
+html.light h1, html.light h2, html.light h3, html.light h4, html.light h5, html.light h6, html.light .font-display,
+html.dark  h1, html.dark  h2, html.dark  h3, html.dark  h4, html.dark  h5, html.dark  h6, html.dark  .font-display {
+  color: hsl(var(--text-heading)) !important;
+}
+
+/* Brand accent utilities — Tailwind arbitrary values like
+   text-[hsl(var(--gold))] already read --gold live, so brand
+   color edits propagate automatically. The block above just
+   guarantees Text Colors take effect everywhere. */
+
+/* Button text override — applies to .btn-primary text */
+.btn-primary, .btn-primary * { color: hsl(var(--button-text)) !important; }
